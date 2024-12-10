@@ -5,9 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import jakarta.json.Json;
@@ -48,12 +52,41 @@ public class BoardGamesRestService {
         return boardList;
     }
 
-    public String getBoardgameById(Integer boardgameId) {
+    public String getBoardgameById(String boardgameId) {
         
-        return null;
+        String boardgame = mapRepo.get(Constant.boardGamesKey, boardgameId);
+        
+        return boardgame;
     }
 
-
+    public ResponseEntity<Map<String, String>> updateBoardgame(String boardgameId, 
+        String boardgameUpdate, Boolean upsert) {
     
+        String existingBoardgame = mapRepo.get(Constant.boardGamesKey, boardgameId);
 
+        Map<String, String> response = new HashMap<>(); 
+    
+        if (existingBoardgame != null) {
+            mapRepo.create(Constant.boardGamesKey, boardgameId, boardgameUpdate);
+    
+            response.put("update_count", "1"); 
+            response.put("id", boardgameId);
+    
+            return ResponseEntity.ok(response);
+        } 
+        else if (upsert) {
+
+            mapRepo.create(Constant.boardGamesKey, boardgameId, boardgameUpdate);
+    
+            response.put("update_count", "1"); 
+            response.put("id", boardgameId);
+    
+            return ResponseEntity.ok(response);
+        } 
+        else {
+            response.put("error", "Board game not found for update");
+    
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package sg.edu.nus.iss.vttp5_day6w.restcontroller;
 
 import java.io.FileNotFoundException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,7 +45,7 @@ public class BoardGamesRestController {
     @GetMapping("/{boardgameId}")
     // day 16 slide GET Endpoint
     public ResponseEntity<String> givenBoardGames(@PathVariable String boardgameId) {
-        String boardgameFound = boardGamesRestService.getBoardgameById(Integer.parseInt(boardgameId));
+        String boardgameFound = boardGamesRestService.getBoardgameById(boardgameId);
     
         if (boardgameFound != null) {
             return new ResponseEntity<>(boardgameFound, HttpStatus.OK);
@@ -55,12 +56,10 @@ public class BoardGamesRestController {
     }
 
     @PutMapping("/{boardgameId}")
-    public ResponseEntity<String> updateBoardGames(@PathVariable String boardgameId,
+    public ResponseEntity<Map<String, String>> updateBoardGames(@PathVariable String boardgameId,
     @RequestBody String boardgameUpdate, @RequestParam(required = false, defaultValue = "false") Boolean upsert) {
         
-        
-        return null;
+        return boardGamesRestService.updateBoardgame(boardgameId, boardgameUpdate, upsert);
         
     }
-
 }
