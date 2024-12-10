@@ -1,14 +1,14 @@
 package sg.edu.nus.iss.vttp5_day6w.model;
 
 public class BoardGames {
-    private String id;
+    private Integer id;
     private String name;
     private Integer year;
     private Integer ranking;
     private Integer userRated;
     private String url;
     
-    public BoardGames(String id, String name, Integer year, Integer ranking, Integer userRated, String url) {
+    public BoardGames(Integer id, String name, Integer year, Integer ranking, Integer userRated, String url) {
         this.id = id;
         this.name = name;
         this.year = year;
@@ -18,14 +18,14 @@ public class BoardGames {
     }
 
     public BoardGames() {
-        
+
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -69,7 +69,4 @@ public class BoardGames {
         this.url = url;
     }
 
-    
-    
-    
 }
