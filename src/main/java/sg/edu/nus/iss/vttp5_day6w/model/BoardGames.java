@@ -7,14 +7,18 @@ public class BoardGames {
     private Integer ranking;
     private Integer userRated;
     private String url;
+    private String imageUrl;
     
-    public BoardGames(Integer id, String name, Integer year, Integer ranking, Integer userRated, String url) {
+
+    public BoardGames(Integer id, String name, Integer year, Integer ranking, Integer userRated, String url,
+            String imageUrl) {
         this.id = id;
         this.name = name;
         this.year = year;
         this.ranking = ranking;
         this.userRated = userRated;
         this.url = url;
+        this.imageUrl = imageUrl;
     }
 
     public BoardGames() {
@@ -69,4 +73,13 @@ public class BoardGames {
         this.url = url;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    
 }
