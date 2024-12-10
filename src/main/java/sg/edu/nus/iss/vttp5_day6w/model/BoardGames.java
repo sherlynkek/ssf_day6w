@@ -9,7 +9,6 @@ public class BoardGames {
     private String url;
     private String imageUrl;
     
-
     public BoardGames(Integer id, String name, Integer year, Integer ranking, Integer userRated, String url,
             String imageUrl) {
         this.id = id;
